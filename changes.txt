@@ -1,0 +1,1 @@
+opponent needs to be a pointer
