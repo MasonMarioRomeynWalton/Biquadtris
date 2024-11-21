@@ -1,5 +1,6 @@
 module text;
 
+
 void Text::notify() {
 }
 

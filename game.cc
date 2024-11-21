@@ -1,6 +1,5 @@
 export module game;
 import subject;
-//#include "subject.cc"
 
 export class Game : public Subject {
         int highScore;

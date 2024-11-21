@@ -9,7 +9,7 @@ export class Level {
     public:
 //        virtual char generateBlock(Board& prev);
         Level() = default;
-        virtual Level nextLevel();
-        virtual Level prevLevel();
-        virtual ~Level();
+        virtual Level* nextLevel() = 0;
+        virtual Level* prevLevel() = 0;
+        virtual ~Level() = default;
 };
