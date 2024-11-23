@@ -1,7 +1,34 @@
 module text;
+import <iostream>;
 
+using namespace std;
+
+const int columns = 13;
+const int rows = 18;
+
+Text::Text(Game* whoFrom, ostream& out) : whoFrom{whoFrom}, out{out} {}
 
 void Text::notify() {
+    for (int player = 1; player <= 2; player++) {
+        out << "Level: " << '\t' << whoFrom->getLevel(player) << endl;
+        out << "Score: " << '\t' << whoFrom->getScore(player) << endl;
+        for (int i = 0; i < columns; ++i) {
+            out << '-';
+        }
+        out << endl;
+        for (int i = 0; i < columns; ++i) {
+            for (int j = 0; j < rows; ++j) {
+                out << whoFrom->getTile(i, j, player);        
+            }
+            out << endl;
+        }
+        for (int i = 0; i < columns; ++i) {
+            out << '-';
+        }
+        out << endl;
+        out << "Next: " << '\t' << whoFrom->getNextBlock(player) << endl;
+
+        cout << '\n' << endl;
+    }
 }
 
-//Text::Text(Studio* whoFrom, int top, int bottom, int left, int right) : whoFrom{whoFrom}, top{top}, bottom{bottom}, left{left}, right{right} {}

@@ -7,10 +7,7 @@ import <vector>;
 
 
 export class Subject {
-    //Observer* observers;
-    //Problem with next one
     std::vector<Observer*> observers;
-    //std::vector<int> observers;
  public:
   void attach( Observer* o );
   void detach( Observer* o );

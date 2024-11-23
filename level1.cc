@@ -16,6 +16,7 @@ char Level1::generateBlock() {
         else if (block == 8) {return 'S';}
         else if (block == 9) {return 'Z';}
         else if (block == 10 || block == 11) {return 'T';}
+        else {return '1';}
 }
 Level* Level1::nextLevel() {return (new Level2{});}
 Level* Level1::prevLevel() {return (new Level0{});}

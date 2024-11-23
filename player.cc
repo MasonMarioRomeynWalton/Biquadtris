@@ -5,13 +5,12 @@ import <vector>;
 export class Player {
     private:
         //Board board;
+        char board;
         Level* level;
         //std::vector<Effect*> effects;
 
         int score;
-        //int seed;
         Player* opponent;
-        std::vector<std::vector<char> > board;
         //bool blind;
 
         //void addNextBlock();
@@ -31,7 +30,11 @@ export class Player {
         // Run the player's turn
         void runTurn();
 
+        Level* getLevel() {return level;}
+        char getBoard() {return board;}
+
         // Setter for game file
-        void setOpponent(Player* p);
+        void setOpponent(Player* p) {opponent = p;}
+
 
 };

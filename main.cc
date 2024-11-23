@@ -1,5 +1,8 @@
 import game;
+import text;
 import <string>;
+import <iostream>;
+
 using namespace std;
 
 int main(int argc, char** argv) {
@@ -14,7 +17,11 @@ int main(int argc, char** argv) {
         }
     }
     srand(seed);
-    Game game;
-    game.run();
+
+    Game* game = new Game{};
+    Text* text = new Text{game, cout};
+    game->attach(text);
+
+    game->run();
     return 0;
 }

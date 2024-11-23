@@ -18,5 +18,5 @@ char Level2::generateBlock() {
         else if (block == 6) {return 'T';}
         else {return '2';}
 }
-Level* Level2::nextLevel() {return (new Level2{});}
+Level* Level2::nextLevel() {return (new Level3{});}
 Level* Level2::prevLevel() {return (new Level1{});}

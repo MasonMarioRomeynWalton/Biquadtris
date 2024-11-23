@@ -4,8 +4,10 @@ import game;
 import <iostream>;
 
 export class Text : public Observer{
-    Game* subject;
-    std::ostream out;
+    Game* whoFrom;
+    std::ostream& out;
  public:
-  void notify();
+    Text(Game* whoFrom, std::ostream& out);
+    Text() = default;
+    void notify() override;
 };

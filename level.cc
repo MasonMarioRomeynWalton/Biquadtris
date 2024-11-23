@@ -16,4 +16,6 @@ export class Level {
         virtual char generateBlock() = 0;
         virtual Level* nextLevel() = 0;
         virtual Level* prevLevel() = 0;
+
+        int getNumber() {return number;}
 };
