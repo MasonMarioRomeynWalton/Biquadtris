@@ -1,15 +1,12 @@
-export module level0;
+module concrete_levels;
 import level;
 
-export class Level0 : public Level {
+import <iostream>;
+import <cstdlib>;
 
-    public:
-        Level0();
-        //Level0() = default;
-        //char generateBlock(Board& prev) override;
-        Level* prevLevel() override;
-        Level* nextLevel() override;
-        //Level* prevLevel();
-        //Level* nextLevel();
-        ~Level0();
-};
+
+Level0::Level0() : Level{false, 0, 0} {}
+
+char Level0::generateBlock() {return '0';}
+Level* Level0::nextLevel() {return (new Level1{});}
+Level* Level0::prevLevel() {return (new Level0{});}

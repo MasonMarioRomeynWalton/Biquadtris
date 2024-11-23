@@ -3,7 +3,7 @@ import subject;
 
 export class Game : public Subject {
         int highScore;
-        int seed;
+//        int seed;
     public:
         char getTile(int x, int y, int player);
         int getLevel();

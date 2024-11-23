@@ -9,7 +9,7 @@ export class Player {
         //std::vector<Effect*> effects;
 
         int score;
-        int seed;
+        //int seed;
         Player* opponent;
         std::vector<std::vector<char> > board;
         //bool blind;
@@ -24,5 +24,14 @@ export class Player {
         //void drop();
 
     public:
+
+        // Constructor
+        Player();
+
+        // Run the player's turn
         void runTurn();
+
+        // Setter for game file
+        void setOpponent(Player* p);
+
 };
