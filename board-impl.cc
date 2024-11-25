@@ -6,7 +6,7 @@ import <vector>;
 import <utility>;
 
 Board::Board() {
-  state = std::vector<std::vector<char>>(15, std::vector<char>(11, ' ')); 
+  state = std::vector<std::vector<char>>(18, std::vector<char>(11, ' ')); 
   blocks = new NoBlocks{};
 }
 

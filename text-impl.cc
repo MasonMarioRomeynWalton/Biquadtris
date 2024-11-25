@@ -3,7 +3,7 @@ import <iostream>;
 
 using namespace std;
 
-const int columns = 13;
+const int columns = 11;
 const int rows = 18;
 
 Text::Text(Game* whoFrom, ostream& out) : whoFrom{whoFrom}, out{out} {}
@@ -16,8 +16,8 @@ void Text::notify() {
             out << '-';
         }
         out << endl;
-        for (int i = 0; i < columns; ++i) {
-            for (int j = 0; j < rows; ++j) {
+        for (int i = 0; i < rows; ++i) {
+            for (int j = 0; j < columns; ++j) {
                 out << whoFrom->getTile(i, j, player);        
             }
             out << endl;

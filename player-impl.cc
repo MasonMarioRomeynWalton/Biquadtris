@@ -92,8 +92,8 @@ void Player::runTurn() {
     // Generate a new block for the next turn
     gen_block = level->generateBlock();
 
-    //if(!(board.addNextBlock(gen_block))) {
-    if(true) {
+    if(!(board.addNextBlock(gen_block.block, level->getNumber()))) {
+    //if(true) {
         //Temporary code to end the game
         cout << "GAME OVER" << endl;
         exit(0);

@@ -6,9 +6,9 @@ import <fstream>;
 
 using namespace std;
     
-char Game::getTile(int x, int y, int player) {
-    if (player == 1) {return ((player1.getBoard().getState())[y][x]);}
-    if (player == 2) {return ((player2.getBoard().getState())[y][x]);}
+char Game::getTile(int row, int col, int player) {
+    if (player == 1) {return ((player1.getBoard().getState())[row][col]);}
+    if (player == 2) {return ((player2.getBoard().getState())[row][col]);}
     else {return '#';}
 }
 
