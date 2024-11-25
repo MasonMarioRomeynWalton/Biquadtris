@@ -4,6 +4,7 @@ import <fstream>;
 
 export struct GeneratedBlock {
     char block;
+
     // Whether or not there is a 1x1 block added
     bool middle;
 };

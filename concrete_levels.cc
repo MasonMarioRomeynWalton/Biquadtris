@@ -36,6 +36,8 @@ export class Level3 : public Level {
 };
 
 export class Level4 : public Level {
+    private:
+        int count;
     public:
         Level4(std::ifstream& inputFile);
         GeneratedBlock generateRandomBlock() override;

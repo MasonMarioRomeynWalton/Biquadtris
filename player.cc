@@ -1,11 +1,13 @@
 export module player;
 import level;
+import board;
+
 import <vector>;
 import <fstream>;
 
 export class Player {
     private:
-        //Board board;
+        Board board;
         GeneratedBlock gen_block;
         Level* level;
         //std::vector<Effect*> effects;
@@ -32,7 +34,8 @@ export class Player {
         void runTurn();
 
         Level* getLevel() {return level;}
-        char getBoard() {return gen_block.block;}
+        char getGenBlock() {return gen_block.block;}
+        Board getBoard() {return board;}
 
         // Setter for game file
         void setOpponent(Player* p) {opponent = p;}

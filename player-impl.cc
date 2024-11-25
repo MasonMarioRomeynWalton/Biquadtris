@@ -1,6 +1,11 @@
 module player;
 import concrete_levels;
-//import board;
+
+import score;
+import board;
+import blocks;
+import newblock;
+import centersquare;
 
 import <string>;
 import <iostream>;
@@ -13,7 +18,6 @@ using namespace std;
 const vector<string> cmdlist = vector<string>{"left","right","down","clockwise","counterclockwise","drop","levelup","leveldown"};
 
 Player::Player() {
-    //block = Board{vector<vector<char>>};
     level = nullptr;
 }
 
@@ -87,6 +91,14 @@ void Player::runTurn() {
     }
     // Generate a new block for the next turn
     gen_block = level->generateBlock();
+
+    //if(!(board.addNextBlock(gen_block))) {
+    if(true) {
+        //Temporary code to end the game
+        cout << "GAME OVER" << endl;
+        exit(0);
+    }
+
 }
 
 void Player::setLevel(int new_level, ifstream& sequenceFile) {

@@ -6,7 +6,12 @@ import <fstream>;
 
 using namespace std;
     
-char Game::getTile(int x, int y, int player) {return ' ';}
+char Game::getTile(int x, int y, int player) {
+    if (player == 1) {return ((player1.getBoard().getState())[y][x]);}
+    if (player == 2) {return ((player2.getBoard().getState())[y][x]);}
+    else {return '#';}
+}
+
 int Game::getLevel(int player) {
     if (player == 1) {return player1.getLevel()->getNumber();}
     if (player == 2) {return player2.getLevel()->getNumber();}
@@ -14,9 +19,9 @@ int Game::getLevel(int player) {
 }
 int Game::getScore(int player) {return 0;}
 char Game::getNextBlock(int player) {
-    if (player == 1) {return player1.getBoard();}
-    if (player == 2) {return player2.getBoard();}
-    else {return ' ';}
+    if (player == 1) {return player1.getGenBlock();}
+    if (player == 2) {return player2.getGenBlock();}
+    else {return '#';}
 }
 
 void Game::setLevels(int level, ifstream& sequenceFile1, ifstream& sequenceFile2) {
