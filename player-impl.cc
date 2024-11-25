@@ -56,10 +56,14 @@ void Player::runTurn() {
 
             // Move the piece to the left
             if (cmd == "left") {
-                cout << "left" << endl;
+                if (!(board.translateAttempt('l'))) {
+                    break;
+                }
             // Move the piece to the right
             } else if (cmd == "right") {
-                cout << "right" << endl;
+                if (!(board.translateAttempt('r'))) {
+                    break;
+                }
             // Move the piece down
             } else if (cmd == "down") {
                 if (!(board.translateAttempt('d'))) {
@@ -67,12 +71,17 @@ void Player::runTurn() {
                 }
             // Rotate the piece clockwise
             } else if (cmd == "clockwise") {
-                cout << "clockwise" << endl;
+                if (!(board.rotateAttempt('r'))) {
+                    break;
+                }
             // Rotate the piece counterclockwise
             } else if (cmd == "counterclockwise") {
-                cout << "counterclockwise" << endl;
+                if (!(board.rotateAttempt('l'))) {
+                    break;
+                }
             // Drop the piece to the bottom
             } else if (cmd == "drop") {
+                while (board.translateAttempt('d')) {}
                 break;
             // Go to the next level
             } else if (cmd == "levelup") {

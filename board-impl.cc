@@ -17,7 +17,7 @@ std::vector<std::vector<char>> Board::getState() { return state; }
 bool Board::checkBound(std::vector<std::pair<int,int>> coords) {
   bool ret = true;
   for(auto &[x, y] : coords) {
-    ret = ret && (state[y][x] == ' ');
+    ret = ret && (x >= 0) && (x < 11) && (y >= 0) && (y < 18) && (state[y][x] == ' ');
   }
   return ret;
 }
@@ -80,34 +80,43 @@ bool Board::addNextBlock(char c, int level) {
 }
 
 bool Board::rotateAttempt(char dir) {
+  std::vector<std::vector<char>> oldState (state);
   std::vector<std::pair<int,int>> next = blocks->rotate(dir);
-  bool cond = checkBound(next);
   char b;
+  for(auto &[x, y] : blocks->getCoords()) {
+    b = state[y][x];
+    state[y][x] = ' ';
+  }
+  bool cond = checkBound(next);
   if(cond) {
-    for(auto &[x, y] : blocks->getCoords()) {
-       b = state[y][x];
-       state[y][x] = ' ';
-    }
     for(auto &[x, y] : next) {
       state[y][x] = b;
     }
+  }
+  else { 
+    state = oldState; 
   }
 
   return cond;
 }
 
 bool Board::translateAttempt(char dir) {
+  std::vector<std::vector<char>> oldState (state);
   std::vector<std::pair<int,int>> next = blocks->translate(dir);
-  bool cond = checkBound(next);
   char b;
+  for(auto &[x, y] : blocks->getCoords()) {
+    b = state[y][x];
+    state[y][x] = ' ';
+  }
+  bool cond = checkBound(next);
   if(cond) {
-    for(auto &[x, y] : blocks->getCoords()) {
-      b = state[y][x];
-      state[y][x] = ' ';
-    }
     for(auto &[x, y] : next) {
       state[y][x] = b;
     }
   }
-  return checkBound(blocks->translate(dir));
+  else {
+    state = oldState;
+  }
+
+  return cond;
 }

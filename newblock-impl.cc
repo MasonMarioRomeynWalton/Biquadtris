@@ -41,7 +41,7 @@ std::vector<std::pair<int,int>> NewBlock::rotate(char dir) {
       x0 = y-bottom;
       y0 = 3-(temp-left);
     }
-    else {
+    if (dir == 'l') {
       temp = x;
       x0 = 3-(y-bottom);
       y0 = x-left;
