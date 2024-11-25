@@ -9,7 +9,7 @@ export class Board {
   Blocks* blocks;
   bool checkBound(std::vector<std::pair<int,int>> coords);
  public:
-  Board(std::vector<std::vector<char>> state, Blocks* blocks);
+  Board();
   ~Board();
   std::vector<std::vector<char>> getState();
   bool addNextBlock(char c);

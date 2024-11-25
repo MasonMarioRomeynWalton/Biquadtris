@@ -3,7 +3,10 @@ module board;
 import <vector>;
 import <utility>;
 
-Board::Board(std::vector<std::vector<char>> state, Blocks* blocks): state{state}, blocks{blocks} {}
+Board::Board() {
+  state = std::vector<std::vector<char>>; 
+  blocks = new NewBlock{};
+}
 
 Board::~Board() {}
 

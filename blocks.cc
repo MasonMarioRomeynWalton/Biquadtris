@@ -17,7 +17,7 @@ export class NoBlocks: public Blocks {
    protected:
     std::vector<std::pair<int,int>> coords;
    public:
-    NoBlocks(std::vector<std::pair<int,int>> coords);
+    NoBlocks();
     int clearRow(int i);
 };
 
