@@ -1,6 +1,7 @@
 module board;
 
 import blocks;
+import newblock;
 import <vector>;
 import <utility>;
 
