@@ -9,7 +9,7 @@ using namespace std;
 
 Level0::Level0(ifstream& inputFile) : Level{0, 0, false, inputFile} {}
 
-char Level0::generateRandomBlock() {
+GeneratedBlock Level0::generateRandomBlock() {
     return generateFromFile();
 }
 Level* Level0::nextLevel() {return (new Level1{inputFile});}

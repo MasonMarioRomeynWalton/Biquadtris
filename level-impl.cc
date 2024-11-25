@@ -6,7 +6,7 @@ using namespace std;
 
 Level::Level(int heaviness, int number, bool random, ifstream& inputFile) : heaviness{heaviness}, number{number}, random{random}, inputFile{inputFile} {}
 
-char Level::generateBlock() {
+GeneratedBlock Level::generateBlock() {
     if (random) {
         return generateRandomBlock();
     } else {
@@ -14,8 +14,8 @@ char Level::generateBlock() {
     }
 }
 
-char Level::generateFromFile() {
-    char c;
-    inputFile >> c;
-    return c;
+GeneratedBlock Level::generateFromFile() {
+    GeneratedBlock generated_block{'#', false};
+    inputFile >> generated_block.block;
+    return generated_block;
 }

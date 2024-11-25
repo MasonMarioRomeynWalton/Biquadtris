@@ -6,11 +6,11 @@ import <fstream>;
 export class Player {
     private:
         //Board board;
-        char board;
+        GeneratedBlock gen_block;
         Level* level;
         //std::vector<Effect*> effects;
 
-        int score;
+        //int score;
         Player* opponent;
         //bool blind;
 
@@ -32,7 +32,7 @@ export class Player {
         void runTurn();
 
         Level* getLevel() {return level;}
-        char getBoard() {return board;}
+        char getBoard() {return gen_block.block;}
 
         // Setter for game file
         void setOpponent(Player* p) {opponent = p;}

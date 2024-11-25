@@ -1,15 +1,19 @@
 module player;
 import concrete_levels;
+//import board;
 
 import <string>;
 import <iostream>;
 import <fstream>;
+//import <vector>;
+//import <utility>;
 
 using namespace std;
 
 const vector<string> cmdlist = vector<string>{"left","right","down","clockwise","counterclockwise","drop","levelup","leveldown"};
 
 Player::Player() {
+    //block = Board{vector<vector<char>>};
     level = nullptr;
 }
 
@@ -82,7 +86,7 @@ void Player::runTurn() {
         }
     }
     // Generate a new block for the next turn
-    board = level->generateBlock();
+    gen_block = level->generateBlock();
 }
 
 void Player::setLevel(int new_level, ifstream& sequenceFile) {
@@ -99,5 +103,5 @@ void Player::setLevel(int new_level, ifstream& sequenceFile) {
   }
 
   // Generate the first block of the game
-  board = level->generateBlock();
+  gen_block = level->generateBlock();
 }
