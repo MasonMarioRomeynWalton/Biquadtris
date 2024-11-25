@@ -12,7 +12,7 @@ export class Board {
   Board();
   ~Board();
   std::vector<std::vector<char>> getState();
-  bool addNextBlock(char c);
+  bool addNextBlock(char c, int level);
   bool rotateAttempt(char dir);
   bool translateAttempt(char dir);
 };
