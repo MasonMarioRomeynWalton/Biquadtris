@@ -18,3 +18,5 @@ std::vector<std::pair<int,int>> NoBlocks::translate(char dir) { return coords; }
 int NoBlocks::clearRow(int i) {
   return 0;
 }
+
+std::vector<std::pair<int,int>> NoBlocks::getCoords() { return coords; }

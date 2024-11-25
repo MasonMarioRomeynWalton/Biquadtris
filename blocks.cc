@@ -10,6 +10,7 @@ export class Blocks {
   virtual int clearRow(int i) = 0;
   virtual std::vector<std::pair<int,int>> rotate(char dir) = 0;
   virtual std::vector<std::pair<int,int>> translate(char dir) = 0;
+  virtual std::vector<std::pair<int,int>> getCoords() = 0;
   virtual ~Blocks();
 };
   
@@ -21,6 +22,7 @@ export class NoBlocks: public Blocks {
     int clearRow(int i);
     std::vector<std::pair<int,int>> rotate(char dir);
     std::vector<std::pair<int,int>> translate(char dir);
+    std::vector<std::pair<int,int>> getCoords();
 };
 
 export class Decorator: public Blocks {
@@ -33,4 +35,5 @@ export class Decorator: public Blocks {
     virtual int clearRow(int i) = 0;
     virtual std::vector<std::pair<int,int>> rotate(char dir) = 0;
     virtual std::vector<std::pair<int,int>> translate(char dir) = 0;
+    virtual std::vector<std::pair<int,int>> getCoords() = 0;
 };
