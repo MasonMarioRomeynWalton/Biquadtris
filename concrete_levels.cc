@@ -1,34 +1,36 @@
 export module concrete_levels;
 import level;
 
+import <fstream>;
+
 export class Level0 : public Level {
     public:
-        Level0();
-        char generateBlock() override;
+        Level0(std::ifstream& inputFile);
+        char generateRandomBlock() override;
         Level* prevLevel() override;
         Level* nextLevel() override;
 };
 
 export class Level1 : public Level {
     public:
-        Level1();
-        char generateBlock() override;
+        Level1(std::ifstream& inputFile);
+        char generateRandomBlock() override;
         Level* prevLevel() override;
         Level* nextLevel() override;
 };
 
 export class Level2 : public Level {
     public:
-        Level2();
-        char generateBlock() override;
+        Level2(std::ifstream& inputFile);
+        char generateRandomBlock() override;
         Level* prevLevel() override;
         Level* nextLevel() override;
 };
 
 export class Level3 : public Level {
     public:
-        Level3();
-        char generateBlock() override;
+        Level3(std::ifstream& inputFile);
+        char generateRandomBlock() override;
         Level* prevLevel() override;
         Level* nextLevel() override;
 };

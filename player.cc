@@ -1,6 +1,7 @@
 export module player;
 import level;
 import <vector>;
+import <fstream>;
 
 export class Player {
     private:
@@ -13,19 +14,19 @@ export class Player {
         Player* opponent;
         //bool blind;
 
-        //void addNextBlock();
         //void attachEffect(Effect* e);
         //void clearEffects();
         void nextLevel();
         void prevLevel();
-        //bool rotateAttempt(char dir);
-        //bool translateAttempt(char dir);
         //void drop();
 
     public:
 
         // Constructor
         Player();
+
+        // Destructor
+        ~Player();
 
         // Run the player's turn
         void runTurn();
@@ -35,6 +36,7 @@ export class Player {
 
         // Setter for game file
         void setOpponent(Player* p) {opponent = p;}
+        void setLevel(int level, std::ifstream& sequencefile);
 
 
 };

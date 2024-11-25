@@ -2,10 +2,20 @@ module level;
 import <iostream>;
 import <fstream>;
 
-Level::Level(bool random, int heaviness, int number) : random{random}, heaviness{heaviness}, number{number} {}
+using namespace std;
 
-char generateFromFile(std::ifstream& f) {
+Level::Level(int heaviness, int number, bool random, ifstream& inputFile) : heaviness{heaviness}, number{number}, random{random}, inputFile{inputFile} {}
+
+char Level::generateBlock() {
+    if (random) {
+        return generateRandomBlock();
+    } else {
+        return generateFromFile();
+    }
+}
+
+char Level::generateFromFile() {
     char c;
-    f >> c;
+    inputFile >> c;
     return c;
 }

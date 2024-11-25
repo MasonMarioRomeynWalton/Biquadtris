@@ -2,6 +2,8 @@ export module game;
 import subject;
 import player;
 
+import <fstream>;
+
 export class Game : public Subject {
         int highScore;
         Player player1;
@@ -11,5 +13,8 @@ export class Game : public Subject {
         int getLevel(int player);
         int getScore(int player);
         char getNextBlock(int player);
+
+        void setLevels(int level, std::ifstream& sequenceFile1, std::ifstream& sequenceFile2);
+
         void run();
 };

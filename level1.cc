@@ -2,12 +2,14 @@ module concrete_levels;
 import level;
 
 import <iostream>;
+import <fstream>;
 import <cstdlib>;
 
+using namespace std;
 
-Level1::Level1() : Level{true, 0, 1} {}
+Level1::Level1(ifstream& inputFile) : Level{0, 1, true, inputFile} {}
 
-char Level1::generateBlock() {
+char Level1::generateRandomBlock() {
     int block = rand() % 12;
         if (block == 0 || block == 1) {return 'I';}
         else if (block == 2 || block == 3) {return 'J';}
@@ -18,5 +20,5 @@ char Level1::generateBlock() {
         else if (block == 10 || block == 11) {return 'T';}
         else {return '1';}
 }
-Level* Level1::nextLevel() {return (new Level2{});}
-Level* Level1::prevLevel() {return (new Level0{});}
+Level* Level1::nextLevel() {return (new Level2{inputFile});}
+Level* Level1::prevLevel() {return (new Level0{inputFile});}

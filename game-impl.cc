@@ -1,6 +1,9 @@
 module game;
 import player;
+
 import <iostream>;
+import <fstream>;
+
 using namespace std;
     
 char Game::getTile(int x, int y, int player) {return ' ';}
@@ -14,6 +17,11 @@ char Game::getNextBlock(int player) {
     if (player == 1) {return player1.getBoard();}
     if (player == 2) {return player2.getBoard();}
     else {return ' ';}
+}
+
+void Game::setLevels(int level, ifstream& sequenceFile1, ifstream& sequenceFile2) {
+    player1.setLevel(level, sequenceFile1);
+    player2.setLevel(level, sequenceFile2);
 }
 
 void Game::run() {

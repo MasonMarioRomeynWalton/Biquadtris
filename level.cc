@@ -3,17 +3,23 @@ import <iostream>;
 import <fstream>;
 
 export class Level {
-    bool random;
     int heaviness;
     int number;
 
+    protected:
+        bool random;
+        std::ifstream& inputFile;
+
+        char generateFromFile();
+        virtual char generateRandomBlock() = 0;
+
     public:
         Level() = default;
-        Level(bool random, int heaviness, int number);
+        Level(int heaviness, int number, bool random, std::ifstream& inputFile);
         virtual ~Level() = default;
 
-        char generateFromFile(std::ifstream& f);
-        virtual char generateBlock() = 0;
+        virtual char generateBlock();
+
         virtual Level* nextLevel() = 0;
         virtual Level* prevLevel() = 0;
 

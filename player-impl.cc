@@ -3,35 +3,30 @@ import concrete_levels;
 
 import <string>;
 import <iostream>;
+import <fstream>;
+
 using namespace std;
 
 const vector<string> cmdlist = vector<string>{"left","right","down","clockwise","counterclockwise","drop","levelup","leveldown"};
 
 Player::Player() {
-    //board = vector<vector<char> >(20, vector<char>(10, ' '));
-    level = new Level0{};
+    level = nullptr;
 }
 
-//void Player::addNextBlock();
+Player::~Player() {
+    delete level;
+}
+
 //void Player::attachEffect(Effect* e);
 //void Player::clearEffects();
-void Player::nextLevel() {}
-void Player::prevLevel() {}
-//bool Player::rotateAttempt(char dir);
-//bool Player::translateAttempt(char dir);
 //void Player::drop();
-void Player::runTurn() {
 
-    board = level->generateBlock();
-    //cout << "Your piece is:" << piece << endl;
+void Player::runTurn() {
 
     string input;
     // Take input from the user until the turn is over
     while (cin >> input) {
         
-        // Take input from the user
-        //cin >> input;
-
         // The number of commands that are matches to the input
         int matches = 0;
         string cmd;
@@ -86,6 +81,23 @@ void Player::runTurn() {
             }
         }
     }
+    // Generate a new block for the next turn
+    board = level->generateBlock();
 }
 
-//void Player::setOpponent(Player* p) {opponent = p;}
+void Player::setLevel(int new_level, ifstream& sequenceFile) {
+
+  // Set the level based on the command line args
+  if (new_level == 0) {
+    level = new Level0{sequenceFile};
+  } else if (new_level == 1) {
+    level = new Level1{sequenceFile};
+  } else if (new_level == 2) {
+    level = new Level2{sequenceFile};
+  } else if (new_level == 3) {
+    level = new Level3{sequenceFile};
+  }
+
+  // Generate the first block of the game
+  board = level->generateBlock();
+}
