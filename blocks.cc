@@ -19,6 +19,8 @@ export class NoBlocks: public Blocks {
    public:
     NoBlocks();
     int clearRow(int i);
+    std::vector<std::pair<int,int>> rotate(char dir);
+    std::vector<std::pair<int,int>> translate(char dir);
 };
 
 export class Decorator: public Blocks {

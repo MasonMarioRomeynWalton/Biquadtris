@@ -1,11 +1,12 @@
 module board;
 
+import blocks;
 import <vector>;
 import <utility>;
 
 Board::Board() {
-  state = std::vector<std::vector<char>>; 
-  blocks = new NewBlock{};
+  state = std::vector<std::vector<char>>{}; 
+  blocks = new NoBlocks{};
 }
 
 Board::~Board() {}
