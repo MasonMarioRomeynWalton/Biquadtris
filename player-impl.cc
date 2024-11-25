@@ -62,7 +62,9 @@ void Player::runTurn() {
                 cout << "right" << endl;
             // Move the piece down
             } else if (cmd == "down") {
-                cout << "down" << endl;
+                if (!(board.translateAttempt('d'))) {
+                    break;
+                }
             // Rotate the piece clockwise
             } else if (cmd == "clockwise") {
                 cout << "clockwise" << endl;

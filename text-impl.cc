@@ -16,7 +16,7 @@ void Text::notify() {
             out << '-';
         }
         out << endl;
-        for (int i = 0; i < rows; ++i) {
+        for (int i = rows - 1; i >= 0; --i) {
             for (int j = 0; j < columns; ++j) {
                 out << whoFrom->getTile(i, j, player);        
             }
