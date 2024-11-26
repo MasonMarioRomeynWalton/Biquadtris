@@ -1,7 +1,0 @@
-Removed seed
-Added parameters for getLevel and getScore to specify the player's name
-
-Added get next to game
-Added set levels
-
-Get rid of player nextLevel prevLevel
