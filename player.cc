@@ -19,7 +19,6 @@ export class Player {
         Player* opponent;
 
         GeneratedBlock gen_block;
-        bool is_turn;
 
         //void attachEffect(Effect* e);
         //void clearEffects();

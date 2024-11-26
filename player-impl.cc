@@ -11,19 +11,12 @@ import <string>;
 import <iostream>;
 import <fstream>;
 import <memory>;
-//import <vector>;
-//import <utility>;
 
 using namespace std;
 
 
-Player::Player() : level{nullptr}, is_turn{false} {
-}
-
-Player::~Player() {
-    //delete level;
-    //delete board;
-}
+Player::Player() : level{nullptr} {}
+Player::~Player() {}
 
 //void Player::attachEffect(Effect* e);
 //void Player::clearEffects();
@@ -45,13 +38,3 @@ void Player::setLevel(int new_level, ifstream& sequenceFile) {
   gen_block = level->generateBlock();
   board.addNextBlock(gen_block.block, level->getNumber());
 }
-
-/*
-void Player::nextLevel() {
-    level = level->nextLevel();
-}
-
-void Player::prevLevel() {
-    level = level->prevLevel();
-}
-*/
