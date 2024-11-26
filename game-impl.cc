@@ -1,9 +1,11 @@
 module game;
 import player;
+import level;
 
 import <iostream>;
 import <fstream>;
 import <vector>;
+import <memory>;
 
 using namespace std;
 
@@ -47,7 +49,7 @@ bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
     } else if (cmd == "down") {
        success = current_player->getBoard().translateAttempt('d');
        if (success && draw_board) {notifyObservers();}
-       return success;
+       return !success;
     // Rotate the piece clockwise
     } else if (cmd == "clockwise") {
         success = current_player->getBoard().rotateAttempt('r');
@@ -65,12 +67,12 @@ bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
         return true;
     // Go to the next level
     } else if (cmd == "levelup") {
-        current_player->nextLevel();
+        current_player->getLevel() = unique_ptr<Level> (current_player->getLevel()->nextLevel());
         if (draw_board) {notifyObservers();}
         return false;
     // Go to the previous level
     } else if (cmd == "leveldown") {
-        current_player->prevLevel();
+        current_player->getLevel() = unique_ptr<Level> (current_player->getLevel()->prevLevel());
         if (draw_board) {notifyObservers();}
         return false;
     // Set the level to not randomly generate blocks
