@@ -11,6 +11,7 @@ export class Blocks {
   virtual std::vector<std::pair<int,int>> rotate(char dir) = 0;
   virtual std::vector<std::pair<int,int>> translate(char dir) = 0;
   virtual std::vector<std::pair<int,int>> getCoords() = 0;
+  virtual void setCoords(std::vector<std::pair<int,int>> newCoords) = 0;
   virtual ~Blocks();
 };
   
@@ -23,6 +24,7 @@ export class NoBlocks: public Blocks {
     std::vector<std::pair<int,int>> rotate(char dir);
     std::vector<std::pair<int,int>> translate(char dir);
     std::vector<std::pair<int,int>> getCoords();
+    void setCoords(std::vector<std::pair<int,int>> newCoords);
 };
 
 export class Decorator: public Blocks {
@@ -36,4 +38,5 @@ export class Decorator: public Blocks {
     virtual std::vector<std::pair<int,int>> rotate(char dir) = 0;
     virtual std::vector<std::pair<int,int>> translate(char dir) = 0;
     virtual std::vector<std::pair<int,int>> getCoords() = 0;
+    virtual void setCoords(std::vector<std::pair<int,int>> newCoords) = 0;
 };

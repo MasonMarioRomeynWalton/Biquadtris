@@ -75,3 +75,4 @@ std::vector<std::pair<int,int>> NewBlock::translate(char dir) {
 }
 
 std::vector<std::pair<int,int>> NewBlock::getCoords() { return coords; }
+void NewBlock::setCoords(std::vector<std::pair<int,int>> newCoords) { coords = newCoords; }

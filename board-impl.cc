@@ -2,6 +2,7 @@ module board;
 
 import blocks;
 import newblock;
+import <iostream>;
 import <vector>;
 import <utility>;
 
@@ -81,17 +82,18 @@ bool Board::addNextBlock(char c, int level) {
 
 bool Board::rotateAttempt(char dir) {
   std::vector<std::vector<char>> oldState (state);
-  std::vector<std::pair<int,int>> next = blocks->rotate(dir);
   char b;
   for(auto &[x, y] : blocks->getCoords()) {
     b = state[y][x];
     state[y][x] = ' ';
   }
+  std::vector<std::pair<int,int>> next = blocks->rotate(dir);
   bool cond = checkBound(next);
   if(cond) {
     for(auto &[x, y] : next) {
       state[y][x] = b;
     }
+    blocks->setCoords(next);
   }
   else { 
     state = oldState; 
@@ -102,17 +104,18 @@ bool Board::rotateAttempt(char dir) {
 
 bool Board::translateAttempt(char dir) {
   std::vector<std::vector<char>> oldState (state);
-  std::vector<std::pair<int,int>> next = blocks->translate(dir);
   char b;
   for(auto &[x, y] : blocks->getCoords()) {
     b = state[y][x];
     state[y][x] = ' ';
   }
+  std::vector<std::pair<int,int>> next = blocks->translate(dir);
   bool cond = checkBound(next);
   if(cond) {
     for(auto &[x, y] : next) {
       state[y][x] = b;
     }
+    blocks->setCoords(next);
   }
   else {
     state = oldState;

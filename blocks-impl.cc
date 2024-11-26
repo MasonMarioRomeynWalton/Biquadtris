@@ -20,3 +20,4 @@ int NoBlocks::clearRow(int i) {
 }
 
 std::vector<std::pair<int,int>> NoBlocks::getCoords() { return coords; }
+void NoBlocks::setCoords(std::vector<std::pair<int,int>> newCoords) { coords = newCoords; }

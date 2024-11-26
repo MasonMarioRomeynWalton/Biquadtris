@@ -14,4 +14,5 @@ export class NewBlock: public Decorator {
   std::vector<std::pair<int,int>> rotate(char dir);
   std::vector<std::pair<int,int>> translate(char dir);
   std::vector<std::pair<int,int>> getCoords();
+  void setCoords(std::vector<std::pair<int,int>> newCoords);
 };
