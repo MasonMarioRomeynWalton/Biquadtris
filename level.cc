@@ -30,6 +30,8 @@ export class Level {
         virtual Level* nextLevel() = 0;
         virtual Level* prevLevel() = 0;
 
+        void setRandom(bool random) {this->random = random;}
+
         int getNumber() {return number;}
 };
 

@@ -12,15 +12,14 @@ export class Player {
         Level* level;
         //std::vector<Effect*> effects;
 
-        //int score;
+        //Score score;
         Player* opponent;
         //bool blind;
 
+        bool is_turn;
+
         //void attachEffect(Effect* e);
         //void clearEffects();
-        void nextLevel();
-        void prevLevel();
-        //void drop();
 
     public:
 
@@ -30,8 +29,6 @@ export class Player {
         // Destructor
         ~Player();
 
-        // Run the player's turn
-        void runTurn();
 
         Level* getLevel() {return level;}
         char getGenBlock() {return gen_block.block;}
@@ -40,6 +37,9 @@ export class Player {
         // Setter for game file
         void setOpponent(Player* p) {opponent = p;}
         void setLevel(int level, std::ifstream& sequencefile);
+
+        void nextLevel();
+        void prevLevel();
 
 
 };

@@ -9,6 +9,9 @@ export class Game : public Subject {
         Player player1;
         Player player2;
     public:
+        void run();
+        bool runCommand(std::istream& cin, bool print, Player* current_player);
+
         char getTile(int x, int y, int player);
         int getLevel(int player);
         int getScore(int player);
@@ -16,5 +19,4 @@ export class Game : public Subject {
 
         void setLevels(int level, std::ifstream& sequenceFile1, std::ifstream& sequenceFile2);
 
-        void run();
 };
