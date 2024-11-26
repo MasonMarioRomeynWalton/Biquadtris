@@ -3,6 +3,9 @@ import subject;
 import player;
 
 import <fstream>;
+import <string>;
+
+using namespace std;
 
 export class Game : public Subject {
         int highScore;
@@ -11,6 +14,8 @@ export class Game : public Subject {
     public:
         void run();
         bool runCommand(std::istream& cin, bool print, Player* current_player);
+        string getInput(istream& input);
+        
 
         char getTile(int x, int y, int player);
         int getLevel(int player);

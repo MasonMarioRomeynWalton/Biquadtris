@@ -19,9 +19,7 @@ void Game::run() {
 
     // Main game loop
     while (true) { 
-        if (runCommand(cin, true, (current_player))) {
-            notifyObservers();
-        }
+        while (!(runCommand(cin, true, (current_player)))) {} 
         if (current_player == &player1) {current_player = &player2;}
         else {current_player = &player1;}
     }
@@ -30,6 +28,88 @@ void Game::run() {
 // Evaluates to whether or not the turn is over
 bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
 
+    string cmd = getInput(input);
+    if (cmd == "" || input.eof()) {return false;}
+
+    bool success;
+
+    // Move the piece to the left
+    if (cmd == "left") {
+        success = current_player->getBoard().translateAttempt('l');
+        if (success && draw_board) {notifyObservers();}
+        return false;
+    // Move the piece to the right
+    } else if (cmd == "right") {
+        current_player->getBoard().translateAttempt('r');
+        if (draw_board) {notifyObservers();}
+        return false;
+    // Move the piece down
+    } else if (cmd == "down") {
+       success = current_player->getBoard().translateAttempt('d');
+       if (success && draw_board) {notifyObservers();}
+       return success;
+    // Rotate the piece clockwise
+    } else if (cmd == "clockwise") {
+        success = current_player->getBoard().rotateAttempt('r');
+        if (success && draw_board) {notifyObservers();}
+        return false;
+    // Rotate the piece counterclockwise
+    } else if (cmd == "counterclockwise") {
+        success = current_player->getBoard().rotateAttempt('l');
+        if (success && draw_board) {notifyObservers();}
+        return false;
+    // Drop the piece to the bottom
+    } else if (cmd == "drop") {
+        while (current_player->getBoard().translateAttempt('d')) {}
+        if (draw_board) {notifyObservers();}
+        return true;
+    // Go to the next level
+    } else if (cmd == "levelup") {
+        current_player->nextLevel();
+        if (draw_board) {notifyObservers();}
+        return false;
+    // Go to the previous level
+    } else if (cmd == "leveldown") {
+        current_player->prevLevel();
+        if (draw_board) {notifyObservers();}
+        return false;
+    // Set the level to not randomly generate blocks
+    } else if (cmd == "norandom") {
+        current_player->getLevel()->setRandom(false);
+        return false;
+    // Set the level randomly generate blocks
+    } else if (cmd == "random") {
+        current_player->getLevel()->setRandom(true);
+        return false;
+    // Input a sequence of commands
+    } else if (cmd == "sequence") {
+        return false;
+    // Restart the game
+    } else if (cmd == "restart") {
+        return false;
+    // Change the falling block
+    } else if (cmd == "I") {
+        return false;
+    } else if (cmd == "O") {
+        return false;
+    } else if (cmd == "T") {
+        return false;
+    } else if (cmd == "S") {
+        return false;
+    } else if (cmd == "Z") {
+        return false;
+    } else if (cmd == "J") {
+        return false;
+    } else if (cmd == "L") {
+        return false;
+    // If the command has not been implemented yet
+    } else {
+        cout << "This command has no effect" << endl;
+        return false;
+    }
+}
+
+string Game::getInput(istream& input) {
     // Get the user's input
     string userInput;
 
@@ -49,68 +129,17 @@ bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
         }
         if (matches == 0) {
             cout << "Invalid command" << endl;
-            return false;
+            return "";
         } else if (matches > 1) {
             cout << "Ambiguous command" << endl;
-            return false;
+            return "";
         } else {
-
-            // Move the piece to the left
-            if (cmd == "left") {
-                current_player->getBoard().translateAttempt('l');
-                return draw_board;
-            // Move the piece to the right
-            } else if (cmd == "right") {
-                current_player->getBoard().translateAttempt('r');
-                return draw_board;
-            // Move the piece down
-            } else if (cmd == "down") {
-               current_player->getBoard().translateAttempt('d');
-               return draw_board;
-            // Rotate the piece clockwise
-            } else if (cmd == "clockwise") {
-                current_player->getBoard().rotateAttempt('r');
-                return draw_board;
-            // Rotate the piece counterclockwise
-            } else if (cmd == "counterclockwise") {
-                current_player->getBoard().rotateAttempt('l');
-                return draw_board;
-            // Drop the piece to the bottom
-            } else if (cmd == "drop") {
-                while (current_player->getBoard().translateAttempt('d')) {}
-                return draw_board;
-            // Go to the next level
-            } else if (cmd == "levelup") {
-                current_player->nextLevel();
-                return draw_board;
-            // Go to the previous level
-            } else if (cmd == "leveldown") {
-                current_player->prevLevel();
-                return draw_board;
-            // Set the level to not randomly generate blocks
-            } else if (cmd == "norandom") {
-                current_player->getLevel()->setRandom(false);
-            // Set the level randomly generate blocks
-            } else if (cmd == "random") {
-                current_player->getLevel()->setRandom(true);
-            } else if (cmd == "sequence") {
-            // Restart the game
-            } else if (cmd == "restart") {
-            // Change the falling block
-            } else if (cmd == "I") {
-            } else if (cmd == "O") {
-            } else if (cmd == "T") {
-            } else if (cmd == "S") {
-            } else if (cmd == "Z") {
-            } else if (cmd == "J") {
-            } else if (cmd == "L") {
-            // If the command has not been implemented yet
-            } else {
-                cout << "This command has no effect" << endl;
-            }
+            return cmd;
         }
+
+    } else {
+        return "";
     }
-    return false;
 }
 
 char Game::getTile(int row, int col, int player) {
