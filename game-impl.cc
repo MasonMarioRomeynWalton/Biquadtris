@@ -17,11 +17,20 @@ void Game::run() {
     player2.setOpponent(&player1);  
 
     Player* current_player = &player1;
-    notifyObservers();
+    //notifyObservers();
 
     // Main game loop
     while (true) { 
+        current_player->startTurn();
+        notifyObservers();
         while (!(runCommand(cin, true, (current_player)))) {} 
+
+        if (cin.eof()) {
+            cout << "Game over!" << endl;
+            return;
+        }
+
+        // Change the current player
         if (current_player == &player1) {current_player = &player2;}
         else {current_player = &player1;}
     }
@@ -31,7 +40,7 @@ void Game::run() {
 bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
 
     string cmd = getInput(input);
-    if (cmd == "" || input.eof()) {return false;}
+    if (cmd == "" || input.eof()) {return true;}
 
     bool success;
 
@@ -63,7 +72,6 @@ bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
     // Drop the piece to the bottom
     } else if (cmd == "drop") {
         while (current_player->getBoard().translateAttempt('d')) {}
-        if (draw_board) {notifyObservers();}
         return true;
     // Go to the next level
     } else if (cmd == "levelup") {
@@ -91,18 +99,25 @@ bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
         return false;
     // Change the falling block
     } else if (cmd == "I") {
+        current_player->setNextBlock('I');
         return false;
     } else if (cmd == "O") {
+        current_player->setNextBlock('O');
         return false;
     } else if (cmd == "T") {
+        current_player->setNextBlock('T');
         return false;
     } else if (cmd == "S") {
+        current_player->setNextBlock('S');
         return false;
     } else if (cmd == "Z") {
+        current_player->setNextBlock('Z');
         return false;
     } else if (cmd == "J") {
+        current_player->setNextBlock('J');
         return false;
     } else if (cmd == "L") {
+        current_player->setNextBlock('L');
         return false;
     // If the command has not been implemented yet
     } else {
@@ -157,8 +172,8 @@ int Game::getLevel(int player) {
 }
 int Game::getScore(int player) {return 0;}
 char Game::getNextBlock(int player) {
-    if (player == 1) {return player1.getGenBlock();}
-    if (player == 2) {return player2.getGenBlock();}
+    if (player == 1) {return player1.getNextBlock();}
+    if (player == 2) {return player2.getNextBlock();}
     else {return '#';}
 }
 

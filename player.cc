@@ -18,7 +18,7 @@ export class Player {
         //Score score;
         Player* opponent;
 
-        GeneratedBlock gen_block;
+        GeneratedBlock nextBlock;
 
         //void attachEffect(Effect* e);
         //void clearEffects();
@@ -28,14 +28,15 @@ export class Player {
         Player();
         ~Player();
 
-        void nextLevel();
-        void prevLevel();
+        //calculateScore();
+        void startTurn();
 
         unique_ptr<Level>& getLevel() {return level;}
-        char getGenBlock() {return gen_block.block;}
+        char getNextBlock() {return nextBlock.block;}
         Board& getBoard() {return board;}
 
         void setOpponent(Player* p) {opponent = p;}
         void setLevel(int level, std::ifstream& sequencefile);
+        void setNextBlock(char c) {nextBlock.block = c;}
 
 };

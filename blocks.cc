@@ -33,7 +33,7 @@ export class Decorator: public Blocks {
     Blocks* component;
    public:
     Decorator(Blocks* base);
-    virtual ~Decorator();
+    virtual ~Decorator() {delete component;}
     virtual int clearRow(int i) = 0;
     virtual std::vector<std::pair<int,int>> rotate(char dir) = 0;
     virtual std::vector<std::pair<int,int>> translate(char dir) = 0;

@@ -42,7 +42,6 @@ int main(int argc, char** argv) {
 
     // Free memory
     delete game;
-    delete text;
     sequenceFile1.close();
     sequenceFile2.close();
 

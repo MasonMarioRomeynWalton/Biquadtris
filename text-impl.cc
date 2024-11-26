@@ -8,6 +8,8 @@ const int rows = 18;
 
 Text::Text(Game* whoFrom, ostream& out) : whoFrom{whoFrom}, out{out} {}
 
+Text::~Text() {}
+
 void Text::notify() {
     for (int player = 1; player <= 2; player++) {
         out << "Level: " << '\t' << whoFrom->getLevel(player) << endl;

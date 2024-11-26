@@ -35,6 +35,11 @@ void Player::setLevel(int new_level, ifstream& sequenceFile) {
   }
 
   // Generate the first block of the game
-  gen_block = level->generateBlock();
-  board.addNextBlock(gen_block.block, level->getNumber());
+  nextBlock = level->generateBlock();
+}
+
+void Player::startTurn() {
+    // Add the next block
+    board.addNextBlock(nextBlock.block, level->getNumber());
+    nextBlock = level->generateBlock();
 }
