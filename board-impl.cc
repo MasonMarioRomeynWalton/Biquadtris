@@ -15,12 +15,35 @@ Board::~Board() {}
 
 std::vector<std::vector<char>> Board::getState() { return state; }
 
+char Board::getTile(int x, int y) {
+  if(!blind) return state[y][x];
+  else return '?';
+}
+
 bool Board::checkBound(std::vector<std::pair<int,int>> coords) {
   bool ret = true;
   for(auto &[x, y] : coords) {
     ret = ret && (x >= 0) && (x < 11) && (y >= 0) && (y < 18) && (state[y][x] == ' ');
   }
   return ret;
+}
+
+std::pair<int,int> Board::clearAttempt(int level) {
+  int lines = 0;
+  int blockScore = 0;
+  for(long unsigned int j = 0; j < state.size(); ++j) {
+    bool full = true;
+    for(long unsigned int i = 0; i < state[j].size(); ++i) {
+      full = full && (state[j][i] != ' ');
+    }
+    if(full) {
+      lines += 1;
+      state.erase(state.begin() + j);
+      state.emplace_back(std::vector<char>(11, ' '));
+      blockScore += blocks->clearRow(j);
+    }
+  }
+  return std::pair<int,int>{lines, blockScore};
 }
 
 bool Board::addNextBlock(char c, int level) {

@@ -14,7 +14,6 @@ export class Player {
 
         //Score score;
         Player* opponent;
-        //bool blind;
 
         bool is_turn;
 

@@ -143,8 +143,8 @@ string Game::getInput(istream& input) {
 }
 
 char Game::getTile(int row, int col, int player) {
-    if (player == 1) {return ((player1.getBoard().getState())[row][col]);}
-    if (player == 2) {return ((player2.getBoard().getState())[row][col]);}
+    if (player == 1) {return player1.getBoard().getTile(row, col);}
+    if (player == 2) {return player2.getBoard().getTile(row, col);}
     else {return '#';}
 }
 
