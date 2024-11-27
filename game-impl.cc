@@ -40,7 +40,8 @@ void Game::run() {
 bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
 
     string cmd = getInput(input);
-    if (cmd == "" || input.eof()) {return true;}
+    if (cmd == "") {return false;}
+    if (input.eof()) {return true;}
 
     bool success;
 
@@ -86,6 +87,9 @@ bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
     // Set the level to not randomly generate blocks
     } else if (cmd == "norandom") {
         current_player->getLevel()->setRandom(false);
+        string s;
+        input >> s;
+        current_player->getLevel()->setSequenceFile(s);
         return false;
     // Set the level randomly generate blocks
     } else if (cmd == "random") {

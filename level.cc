@@ -1,6 +1,10 @@
 export module level;
+
+import <string>;
 import <iostream>;
 import <fstream>;
+
+using namespace std;
 
 export struct GeneratedBlock {
     char block;
@@ -15,14 +19,14 @@ export class Level {
 
     protected:
         bool random;
-        std::ifstream& inputFile;
+        ifstream& inputFile;
 
         virtual GeneratedBlock generateFromFile();
         virtual GeneratedBlock generateRandomBlock() = 0;
 
     public:
         Level() = default;
-        Level(int heaviness, int number, bool random, std::ifstream& inputFile);
+        Level(int heaviness, int number, bool random, ifstream& inputFile);
         virtual ~Level() = default;
 
         GeneratedBlock generateBlock();
@@ -31,6 +35,7 @@ export class Level {
         virtual Level* prevLevel() = 0;
 
         void setRandom(bool random) {this->random = random;}
+        void setSequenceFile(string inputFile);
 
         int getNumber() {return number;}
 };

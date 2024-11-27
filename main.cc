@@ -25,7 +25,7 @@ int main(int argc, char** argv) {
     // Create the game and set start level and sequence file
     Game* game = new Game{};
 
-    int start_level = stoi(getArg(argc, argv, "-level", "0"));
+    int start_level = stoi(getArg(argc, argv, "-startlevel", "0"));
     ifstream sequenceFile1;
     ifstream sequenceFile2;
     sequenceFile1.open(getArg(argc, argv, "-scriptfile1", "sequence1.txt"));
