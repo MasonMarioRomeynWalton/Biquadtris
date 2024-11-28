@@ -12,7 +12,10 @@ export class Board {
  public:
   Board();
   ~Board() { delete blocks; }
+
   std::vector<std::vector<char>> getState();
+  void setBlind(bool b) { blind = b; }
+
   char getTile(int x, int y);
   bool addNextBlock(char c, int level);
   bool rotateAttempt(char dir);

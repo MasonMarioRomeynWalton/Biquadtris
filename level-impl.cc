@@ -32,3 +32,7 @@ void Level::setSequenceFile(string inputFileName) {
         cerr << "Could not open file " << inputFileName << endl;
     }
 }
+
+void Level::addWeight(int addedWeight) {
+  heaviness += addedWeight;
+}

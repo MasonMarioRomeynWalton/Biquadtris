@@ -34,6 +34,7 @@ export class Player {
         unique_ptr<Level>& getLevel() {return level;}
         char getNextBlock() {return nextBlock.block;}
         Board& getBoard() {return board;}
+        Player* getOpponent() {return opponent;}
 
         void setOpponent(Player* p) {opponent = p;}
         void setLevel(int level, std::ifstream& sequencefile);
