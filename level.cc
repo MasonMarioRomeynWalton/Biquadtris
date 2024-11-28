@@ -36,6 +36,7 @@ export class Level {
 
         void setRandom(bool random) {this->random = random;}
         void setSequenceFile(string inputFile);
+        void addWeight(int addedWeight);
 
         int getNumber() {return number;}
 };
