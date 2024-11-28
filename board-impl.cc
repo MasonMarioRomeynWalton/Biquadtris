@@ -16,8 +16,6 @@ Board::~Board() {}
 std::vector<std::vector<char>> Board::getState() { return state; }
 
 char Board::getTile(int row, int col) {
-  //
-    //std::cout << row << " " << col << std::endl;
   if(!blind) return state[row][col];
   else return '?';
 }
@@ -98,11 +96,6 @@ bool Board::addNextBlock(char c, int level) {
   bool cond = checkBound(next);
   if(cond) {
     for(auto &[x, y] : next) {
-        //
-      std::cout << "loop2" << std::endl;
-      std::cout << x << std::endl;
-      std::cout << y << std::endl;
-      std::cout << c << std::endl;
       state[y][x] = c;
     }
     blocks = new NewBlock{level, blocks, next};
@@ -120,11 +113,7 @@ bool Board::rotateAttempt(char dir) {
   std::vector<std::pair<int,int>> next = blocks->rotate(dir);
   bool cond = checkBound(next);
   if(cond) {
-      //
-    std::cout << "works" << std::endl;
     for(auto &[x, y] : next) {
-        std::cout << "loop" << std::endl;
-        std::cout << "loop" << std::endl;
       state[y][x] = b;
     }
     blocks->setCoords(next);

@@ -11,7 +11,7 @@ export class Board {
   bool checkBound(std::vector<std::pair<int,int>> coords);
  public:
   Board();
-  ~Board();
+  ~Board() { delete blocks; }
   std::vector<std::vector<char>> getState();
   char getTile(int x, int y);
   bool addNextBlock(char c, int level);
