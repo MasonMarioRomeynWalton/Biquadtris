@@ -1,5 +1,6 @@
 import game;
 import text;
+import graphics;
 
 import <string>;
 import <iostream>;
@@ -36,6 +37,10 @@ int main(int argc, char** argv) {
     // Attach a text observer to the game
     Text* text = new Text{game, cout};
     game->attach(text);
+
+    // Attach a graphical observer to the game
+    Graphics* graphics = new Graphics{game};
+    game->attach(graphics);
 
     // Run the game
     game->run();

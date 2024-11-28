@@ -8,7 +8,7 @@ const int rows = 18;
 
 Text::Text(Game* whoFrom, ostream& out) : whoFrom{whoFrom}, out{out} {}
 
-Text::~Text() {}
+//Text::~Text() {}
 
 void Text::notify() {
     for (int player = 1; player <= 2; player++) {

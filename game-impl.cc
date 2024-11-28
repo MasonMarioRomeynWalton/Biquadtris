@@ -9,8 +9,10 @@ import <memory>;
 
 using namespace std;
 
-const vector<string> cmdlist = vector<string>{"left","right","down","clockwise","counterclockwise","drop","levelup","leveldown","norandom","random","seqence","restart","I","O","T","S","Z","J","L"};
+const vector<string> cmdlist = vector<string>{"left","right","down","clockwise","counterclockwise","drop","levelup","leveldown","norandom","random","sequence","restart","I","O","T","S","Z","J","L"};
     
+Game::Game() : inputFile{nullptr}, highScore{0} {}
+Game::~Game() {}
 
 void Game::run() {
     player1.setOpponent(&player2);
@@ -23,7 +25,7 @@ void Game::run() {
     while (true) { 
         current_player->startTurn();
         notifyObservers();
-        while (!(runCommand(cin, true, (current_player)))) {} 
+        while (!(runCommand(true, (current_player)))) {} 
 
         if (cin.eof()) {
             cout << "Game over!" << endl;
@@ -37,11 +39,21 @@ void Game::run() {
 }
 
 // Evaluates to whether or not the turn is over
-bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
+bool Game::runCommand(bool draw_board, Player* current_player) {
 
-    string cmd = getInput(input);
+    string cmd;
+
+    // If the no more input is available
+    if (cin.eof()) {return true;}
+    // If the input file is over
+    if (inputFile != nullptr && !(inputFile->eof())) {
+        cmd = getInput(*inputFile);
+        draw_board = false;
+    } else {
+        cmd = getInput(cin);
+    };
+    // If the command is invalid
     if (cmd == "") {return false;}
-    if (input.eof()) {return true;}
 
     bool success;
 
@@ -88,7 +100,13 @@ bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
     } else if (cmd == "norandom") {
         current_player->getLevel()->setRandom(false);
         string s;
-        input >> s;
+
+        if (inputFile != nullptr && !(inputFile->eof())) {
+            *inputFile >> s;
+        } else {
+            cin >> s;
+        }
+
         current_player->getLevel()->setSequenceFile(s);
         return false;
     // Set the level randomly generate blocks
@@ -97,6 +115,15 @@ bool Game::runCommand(istream& input, bool draw_board, Player* current_player) {
         return false;
     // Input a sequence of commands
     } else if (cmd == "sequence") {
+        string fileName;
+
+        if (inputFile != nullptr && !(inputFile->eof())) {
+            *inputFile >> fileName;
+        } else {
+            cin >> fileName;
+        }
+
+        inputFile = unique_ptr<ifstream> (new ifstream{fileName});
         return false;
     // Restart the game
     } else if (cmd == "restart") {
