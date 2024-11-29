@@ -12,5 +12,6 @@ Force::Force(char forcedBlock, Player* player): Effect{}, player{player} {
 }
 
 Force::~Force() {
+  // indicate to the player that the effect is no longer applied and is deleted
   player->detachEffect(this);
 }

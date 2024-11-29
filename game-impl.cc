@@ -21,22 +21,27 @@ void Game::run() {
     player2.setOpponent(&player1);  
 
     Player* current_player = &player1;
-    //notifyObservers();
     
     string effect;
 
     // Main game loop
     while (true) { 
-        current_player->startTurn();
+        // check if the next block can be placed
+        if(!current_player->startTurn()) {
+          cout<<"GAME OVER. Player: "<<((current_player == &player1) ? 2 : 1)<<" wins!"<<endl;
+        };
         notifyObservers();
 
-        while (!(runCommand(true, (current_player)))) {} 
+        while (!(runCommand(true, (current_player)))) {}
+        if(!current_player->checkBlock()) {
+          cout<<"GAME OVER. Player: "<<((current_player == &player1) ? 2 : 1)<<" wins!"<<endl;
+        }
 
         // end turn, test if effect should be added
         current_player->clearEffects();
         effect = current_player->endTurn();
         if (effect != "") {
-          cout<<"checked effect"<<endl;
+          // identify and have player apply the effect
           if(effect == "blind") {
               new Blind(current_player->getOpponent());
           } else if(effect == "heavy") {
@@ -51,17 +56,16 @@ void Game::run() {
         }
         // update high score
         if(current_player->getScore() > highScore) {
-            //highScore = current_player->getScore();
+            highScore = current_player->getScore();
         }
+        // call game over if the input file has been exhausted
         if (cin.eof()) {
             cout << "Game over!" << endl;
             return;
         }
 
         // Change the current player
-        //current_player = current_player->getOpponent();
-        if (current_player == &player1) {current_player = &player2;}
-        else {current_player = &player1;}
+        current_player = current_player->getOpponent();
     }
 }
 

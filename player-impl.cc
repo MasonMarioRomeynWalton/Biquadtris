@@ -19,16 +19,19 @@ Player::Player() : level{nullptr} {}
 Player::~Player() {}
 
 void Player::attachEffect(Effect* e) {
+  // Add effect to the list of effects so the player knows i's applied
   effects.emplace_back(e);
 }
 void Player::detachEffect(Effect* e) {
   for(auto it = effects.begin(); it != effects.end();) {
+    // Remove the input effect from the list of effects
     if(*it == e) effects.erase(it);
     else ++it;
   }
 }
 void Player::clearEffects() {
   for(auto e : effects) {
+    // Delete all effects to run their destructors
     delete e;
   }
 }
@@ -50,13 +53,20 @@ void Player::setLevel(int new_level, ifstream& sequenceFile) {
   nextBlock = level->generateBlock();
 }
 
-void Player::startTurn() {
+bool Player::checkBlock() {
+  // return whether the block is in bounds of the board
+  return score.getBoard().checkBound(score.getBoard().getBlocks());
+}
+
+bool Player::startTurn() {
     // Add the next block
+    bool cond = true;
     if (nextBlock.middle) {
-        score.getBoard().addNextBlock('*', level->getNumber());
+        cond = cond && score.getBoard().addNextBlock('*', level->getNumber());
     }
-    score.getBoard().addNextBlock(nextBlock.block, level->getNumber());
+    cond = cond && score.getBoard().addNextBlock(nextBlock.block, level->getNumber());
     nextBlock = level->generateBlock();
+    return cond;
 }
 
 string Player::endTurn() {

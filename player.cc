@@ -27,12 +27,14 @@ export class Player {
         Player();
         ~Player();
 
-        void startTurn();
+        bool startTurn();
         string endTurn();
 
         void attachEffect(Effect* e);
         void detachEffect(Effect* e);
         void clearEffects();
+
+        bool checkBlock();
 
         unique_ptr<Level>& getLevel() {return level;}
         char getNextBlock() {return nextBlock.block;}

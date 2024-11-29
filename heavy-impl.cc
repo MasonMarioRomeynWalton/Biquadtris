@@ -15,7 +15,7 @@ Heavy::Heavy(Player* player): addedWeight{2}, player{player} {
 
 // Destructor
 Heavy::~Heavy() {
-  // Indicate to the player that the effect is no longer applied
+  // Indicate to the player that the effect is no longer applied and delete it
   player->getLevel()->addWeight(0-addedWeight);
   player->detachEffect(this);
 }

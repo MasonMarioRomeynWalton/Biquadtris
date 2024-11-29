@@ -13,7 +13,7 @@ Blind::Blind(Player* player): player{player} {
 
 // Desctructor
 Blind::~Blind() {
-  // indicate to the player that the effect is no longer applied
+  // indicate to the player that the effect is no longer applied and delete it
   player->getBoard().setBlind(false);
   player->detachEffect(this);
 }
