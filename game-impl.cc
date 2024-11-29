@@ -33,7 +33,7 @@ void Game::run() {
         notifyObservers();
 
         while (!(runCommand(true, (current_player)))) {}
-        if(!current_player->checkBlock()) {
+        if(current_player->checkBlock()) {
           cout<<"GAME OVER. Player: "<<((current_player == &player1) ? 2 : 1)<<" wins!"<<endl;
         }
 
