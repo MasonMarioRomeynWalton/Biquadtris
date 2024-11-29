@@ -124,6 +124,10 @@ bool Game::runCommand(bool draw_board, Player* current_player) {
         }
 
         inputFile = unique_ptr<ifstream> (new ifstream{fileName});
+        if (!inputFile->is_open()) {
+            cout << "Unable to open file" << endl;
+            inputFile = nullptr;
+        }
         return false;
     // Restart the game
     } else if (cmd == "restart") {

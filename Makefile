@@ -12,7 +12,7 @@ $(EXEC): $(SOURCES)
 	$(VER) $(CXX) $(HEADERFLAGS) unistd.h
 	$(VER) $(CXX) $(HEADERFLAGS) X11/Xlib.h
 	$(VER) $(CXX) $(HEADERFLAGS) X11/Xutil.h
-	$(VER) $(CXX) $(CXXFLAGS) $(SOURCES) -o $(EXEC)
+	$(VER) $(CXX) $(CXXFLAGS) $(SOURCES) -o $(EXEC) -lX11
 
 .PHONY: clean 
 clean:
