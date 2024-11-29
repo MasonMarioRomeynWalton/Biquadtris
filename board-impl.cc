@@ -13,7 +13,7 @@ Board::~Board() {}
 std::vector<std::vector<char>> Board::getState() { return state; }
 
 char Board::getTile(int row, int col) {
-  if(blind && (col >= 3) && (col <= 9) && (row >= 3) && (row <= 12)) return '?';
+  if(blind && (col >= 2) && (col <= 8) && (row >= 2) && (row <= 11)) return '?';
   else return state[row][col];
 }
 
@@ -26,6 +26,8 @@ bool Board::checkBound(std::vector<std::pair<int,int>> coords) {
 }
 
 std::pair<int,int> Board::clearAttempt(int level) {
+
+
   int lines = 0;
   int blockScore = 0;
   for(long unsigned int j = 0; j < state.size(); ++j) {
@@ -90,6 +92,8 @@ bool Board::addNextBlock(char c, int level) {
       next.emplace_back(std::pair<int,int>{2,15});
       next.emplace_back(std::pair<int,int>{1,14});
       break;
+    case '*':
+      next.emplace_back(std::pair<int,int>{7,0});
   }
   bool cond = checkBound(next);
   if(cond) {

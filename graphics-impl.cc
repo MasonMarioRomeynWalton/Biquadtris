@@ -34,6 +34,8 @@ void Graphics::notify() {
         } else if (colour == 'L') {
           actual_colour = window.Orange;
         } else if (colour == '?') {
+          actual_colour = window.White;
+        } else if (colour == '*') {
           actual_colour = window.Brown;
         } else if (colour == ' ') {
           actual_colour = window.Black;

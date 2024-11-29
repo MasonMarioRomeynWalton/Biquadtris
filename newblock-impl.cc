@@ -2,6 +2,7 @@ module newblock;
 
 import <utility>;
 import <vector>;
+import <iostream>;
 
 NewBlock::NewBlock(int level, Blocks* component, std::vector<std::pair<int,int>> coords): Decorator{component}, level{level}, coords{coords} {}
 
@@ -15,11 +16,12 @@ int NewBlock::clearRow(int i) {
   score += component->clearRow(i);
   if(component->coords.empty()) {
     Blocks* temp = component;
-    if(dynamic_cast<Decorator*>(component)) {
-      component = dynamic_cast<Decorator*>(component)->component;
+    if(dynamic_cast<NewBlock*>(component) != nullptr) {
+      component = dynamic_cast<NewBlock*>(component)->component;
+
+      dynamic_cast<NewBlock*>(temp)->component = nullptr;
+      delete temp;
     }
-    else {component = nullptr; }
-    delete temp;
   }
   return score;
 }

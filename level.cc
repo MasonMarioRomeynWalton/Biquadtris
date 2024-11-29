@@ -39,5 +39,6 @@ export class Level {
         void addWeight(int addedWeight);
 
         int getNumber() {return number;}
+        int getHeaviness() {return heaviness;}
 };
 

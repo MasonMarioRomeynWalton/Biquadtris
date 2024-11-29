@@ -75,7 +75,12 @@ bool Game::runCommand(bool draw_board, Player* current_player) {
     // If the input file is over
     if (inputFile != nullptr && !(inputFile->eof())) {
         cmd = getInput(*inputFile);
-        draw_board = false;
+        if (inputFile->eof()) {
+            notifyObservers();
+            draw_board = true;
+        } else {
+            draw_board = false;
+        }
     } else {
         cmd = getInput(cin);
     };
@@ -87,6 +92,14 @@ bool Game::runCommand(bool draw_board, Player* current_player) {
     // Move the piece to the left
     if (cmd == "left") {
         success = current_player->getBoard().translateAttempt('l');
+        int i = 0;
+        while (success && i < current_player->getLevel()->getHeaviness()) {
+            if (!(current_player->getBoard().translateAttempt('d'))) {
+                if (draw_board) {notifyObservers();}
+                return true;
+            }
+            i++;
+        }
         if (success && draw_board) {notifyObservers();}
         return false;
     // Move the piece to the right
