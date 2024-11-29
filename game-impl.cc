@@ -104,22 +104,54 @@ bool Game::runCommand(bool draw_board, Player* current_player) {
         return false;
     // Move the piece to the right
     } else if (cmd == "right") {
-        current_player->getBoard().translateAttempt('r');
-        if (draw_board) {notifyObservers();}
+        success = current_player->getBoard().translateAttempt('r');
+        int i = 0;
+        while (success && i < current_player->getLevel()->getHeaviness()) {
+            if (!(current_player->getBoard().translateAttempt('d'))) {
+                if (draw_board) {notifyObservers();}
+                return true;
+            }
+            i++;
+        }
+        if (success && draw_board) {notifyObservers();}
         return false;
     // Move the piece down
     } else if (cmd == "down") {
-       success = current_player->getBoard().translateAttempt('d');
-       if (success && draw_board) {notifyObservers();}
-       return !success;
+        success = current_player->getBoard().translateAttempt('d');
+        int i = 0;
+        while (success && i < current_player->getLevel()->getHeaviness()) {
+            if (!(current_player->getBoard().translateAttempt('d'))) {
+                if (draw_board) {notifyObservers();}
+                return true;
+            }
+            i++;
+        }
+        if (success && draw_board) {notifyObservers();}
+        return !success;
     // Rotate the piece clockwise
     } else if (cmd == "clockwise") {
         success = current_player->getBoard().rotateAttempt('r');
+        int i = 0;
+        while (success && i < current_player->getLevel()->getHeaviness()) {
+            if (!(current_player->getBoard().translateAttempt('d'))) {
+                if (draw_board) {notifyObservers();}
+                return true;
+            }
+            i++;
+        }
         if (success && draw_board) {notifyObservers();}
         return false;
     // Rotate the piece counterclockwise
     } else if (cmd == "counterclockwise") {
         success = current_player->getBoard().rotateAttempt('l');
+        int i = 0;
+        while (success && i < current_player->getLevel()->getHeaviness()) {
+            if (!(current_player->getBoard().translateAttempt('d'))) {
+                if (draw_board) {notifyObservers();}
+                return true;
+            }
+            i++;
+        }
         if (success && draw_board) {notifyObservers();}
         return false;
     // Drop the piece to the bottom
