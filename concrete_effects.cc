@@ -7,7 +7,7 @@ export class Blind: public Effect {
   Player* player;
  public:
   Blind(Player* player);
-  virtual ~Blind() override;
+  ~Blind();
 };
 
 export class Heavy: public Effect {
@@ -15,12 +15,12 @@ export class Heavy: public Effect {
   Player* player;
  public:
   Heavy(Player* player);
-  virtual ~Heavy() override;
+  ~Heavy();
 };
 
 export class Force: public Effect {
   Player* player;
  public:
   Force(char forcedBlock, Player* player);
-  virtual ~Force() override;
+  ~Force();
 };

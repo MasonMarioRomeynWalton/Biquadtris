@@ -1,16 +1,17 @@
-#include <window.h>
 export module graphics;
+
+import window;
+
 import observer;
-import studio;
+import game;
+
+//#include "window.cc"
 
 export class Graphics : public Observer{
  private:
-  Studio* whoFrom;
-  int top;
-  int bottom;
-  int left;
-  int right;
+  Game* whoFrom;
   Xwindow window;
  public:
+  Graphics(Game* whoFrom);
   void notify();
 };

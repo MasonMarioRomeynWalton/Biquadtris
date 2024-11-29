@@ -8,7 +8,7 @@ export class Text : public Observer{
     std::ostream& out;
  public:
     Text(Game* whoFrom, std::ostream& out);
-    Text() = default;
-    ~Text();
+    //Text() = default;
+    //~Text();
     void notify() override;
 };

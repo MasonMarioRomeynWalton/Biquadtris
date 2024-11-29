@@ -4,16 +4,24 @@ import player;
 
 import <fstream>;
 import <string>;
+import <iostream>;
+import <memory>;
 
 using namespace std;
 
 export class Game : public Subject {
+        unique_ptr<ifstream> inputFile;
+
         int highScore;
         Player player1;
         Player player2;
     public:
+
+        Game();
+        ~Game();
+
         void run();
-        bool runCommand(std::istream& cin, bool print, Player* current_player);
+        bool runCommand(bool print, Player* current_player);
         string getInput(istream& input);
         
 

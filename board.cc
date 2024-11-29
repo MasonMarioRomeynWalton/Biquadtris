@@ -7,7 +7,7 @@ import <utility>;
 export class Board {
   std::vector<std::vector<char>> state;
   Blocks* blocks;
-  bool blind;
+  bool blind = false;
   bool checkBound(std::vector<std::pair<int,int>> coords);
  public:
   Board();

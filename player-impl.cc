@@ -52,6 +52,9 @@ void Player::setLevel(int new_level, ifstream& sequenceFile) {
 
 void Player::startTurn() {
     // Add the next block
+    if (nextBlock.middle) {
+        score.getBoard().addNextBlock('*', level->getNumber());
+    }
     score.getBoard().addNextBlock(nextBlock.block, level->getNumber());
     nextBlock = level->generateBlock();
 }
