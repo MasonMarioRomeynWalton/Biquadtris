@@ -18,8 +18,20 @@ using namespace std;
 Player::Player() : level{nullptr} {}
 Player::~Player() {}
 
-//void Player::attachEffect(Effect* e);
-//void Player::clearEffects();
+void Player::attachEffect(Effect* e) {
+  effects.emplace_back(e);
+}
+void Player::detachEffect(Effect* e) {
+  for(auto it = effects.begin(); it != effects.end();) {
+    if(*it == e) effects.erase(it);
+    else ++it;
+  }
+}
+void Player::clearEffects() {
+  for(auto e : effects) {
+    delete e;
+  }
+}
 
 void Player::setLevel(int new_level, ifstream& sequenceFile) {
 
@@ -40,6 +52,24 @@ void Player::setLevel(int new_level, ifstream& sequenceFile) {
 
 void Player::startTurn() {
     // Add the next block
-    board.addNextBlock(nextBlock.block, level->getNumber());
+    score.getBoard().addNextBlock(nextBlock.block, level->getNumber());
     nextBlock = level->generateBlock();
+}
+
+string Player::endTurn() {
+  // Attempt to clear lines
+  if(score.clearLines(level->getNumber()) >= 2) {
+    // Add an effect if more than 1 line is cleared
+    while(true) {
+      cout<<"Choose a Special Action"<<endl;
+      string action;
+      cin >> action;
+      if((action == "blind") || 
+         (action == "heavy") ||
+         (action == "force")) {
+        return action;
+      }
+    }
+  }
+  else return "";
 }
