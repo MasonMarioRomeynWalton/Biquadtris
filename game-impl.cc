@@ -1,6 +1,8 @@
 module game;
 import player;
 import level;
+import effects;
+import concrete_effects;
 
 import <iostream>;
 import <fstream>;
@@ -18,19 +20,42 @@ void Game::run() {
 
     Player* current_player = &player1;
     //notifyObservers();
+    
+    string effect;
 
     // Main game loop
     while (true) { 
         current_player->startTurn();
         notifyObservers();
         while (!(runCommand(cin, true, (current_player)))) {} 
-
+        // end turn, test if effect should be added
+        current_player->clearEffects();
+        effect = current_player->endTurn();
+        if (effect != "") {
+          cout<<"checked effect"<<endl;
+          if(effect == "blind") {
+              new Blind(current_player->getOpponent());
+          } else if(effect == "heavy") {
+              new Heavy(current_player->getOpponent());
+          } else if(effect == "force") {
+              char forced;
+              while(!((forced == 'I') || (forced == 'O') || (forced == 'T') || (forced == 'S') || (forced == 'Z') || (forced == 'J') || (forced == 'L'))) {
+                cin>>forced;
+              }
+              new Force(forced, current_player->getOpponent());
+          }
+        }
+        // update high score
+        if(current_player->getScore() > highScore) {
+            //highScore = current_player->getScore();
+        }
         if (cin.eof()) {
             cout << "Game over!" << endl;
             return;
         }
 
         // Change the current player
+        //current_player = current_player->getOpponent();
         if (current_player == &player1) {current_player = &player2;}
         else {current_player = &player1;}
     }
@@ -174,7 +199,11 @@ int Game::getLevel(int player) {
     if (player == 2) {return player2.getLevel()->getNumber();}
     else {return -1;}
 }
-int Game::getScore(int player) {return 0;}
+int Game::getScore(int player) {
+  if(player == 1) return player1.getScore();
+  if(player == 2) return player2.getScore();
+  else return -1;
+}
 char Game::getNextBlock(int player) {
     if (player == 1) {return player1.getNextBlock();}
     if (player == 2) {return player2.getNextBlock();}

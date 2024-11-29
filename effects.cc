@@ -1,6 +1,7 @@
 export module effects;
 
-class Effects {
+export class Effect {
  public:
-  virtual ~Effects() = 0;
+  Effect() = default;
+  virtual ~Effect() = 0;
 };

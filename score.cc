@@ -1,12 +1,16 @@
 export module score;
 
 import board;
+import <memory>;
 
 export class Score {
   int score;
-  Board* board;
+  Board board;
  public:
-  Score(int score, Board* board);
+  Score();
   ~Score();
   int clearLines(int level);
+  
+  Board& getBoard() {return board;}
+  int getValue() {return score;}
 };

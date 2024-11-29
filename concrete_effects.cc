@@ -1,25 +1,26 @@
 export module concrete_effects;
 
+import effects;
 import player;
 
-export class Blind {
+export class Blind: public Effect {
   Player* player;
  public:
   Blind(Player* player);
-  ~Blind();
+  virtual ~Blind() override;
 };
 
-export class Heavy {
+export class Heavy: public Effect {
   int addedWeight;
   Player* player;
  public:
-  Heavy(int addedWeight, Player* player);
-  ~Heavy();
+  Heavy(Player* player);
+  virtual ~Heavy() override;
 };
 
-export class Force {
+export class Force: public Effect {
   Player* player;
  public:
   Force(char forcedBlock, Player* player);
-  ~Force();
+  virtual ~Force() override;
 };

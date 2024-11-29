@@ -6,18 +6,15 @@ import <iostream>;
 import <vector>;
 import <utility>;
 
-Board::Board() {
-  state = std::vector<std::vector<char>>(18, std::vector<char>(11, ' ')); 
-  blocks = new NoBlocks{};
-}
+Board::Board(): state{std::vector<std::vector<char>>(18, std::vector<char>(11, ' '))}, blocks {new NoBlocks{}} {}
 
 Board::~Board() {}
 
 std::vector<std::vector<char>> Board::getState() { return state; }
 
 char Board::getTile(int row, int col) {
-  if(!blind) return state[row][col];
-  else return '?';
+  if(blind && (col >= 3) && (col <= 9) && (row >= 3) && (row <= 12)) return '?';
+  else return state[row][col];
 }
 
 bool Board::checkBound(std::vector<std::pair<int,int>> coords) {
